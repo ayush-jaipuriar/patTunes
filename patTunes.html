@@ -11,18 +11,34 @@
   <!-- Define inlined PaperScript associate it with myCanvas -->
   <script type="text/paperscript" canvas="myCanvas">
 
-    var x=0;
-      var maxPoint = new Point(view.size.width, view.size.height);
-      var random= maxPoint * Point.random();
+    var circles = [];
+    
+      
+      
       
   
       function onKeyDown(event) {
+          var maxPoint = new Point(view.size.width, view.size.height);
+      var random= maxPoint * Point.random();
         var random= maxPoint * Point.random();
-	            var myCircle = new Path.Circle(new Point(random),5);
-      myCircle.fillColor = 'orange';
+	            var myCircle = new Path.Circle(new Point(random),100);
+      myCircle.fillColor = 'red';
+      circles.push(myCircle);
+      
 	
 }
         
+
+
+function onFrame(event) {
+	// Each frame, change the fill color of the path slightly by
+  // adding 1 to its hue:
+  for (var i=0; i<circles.length; i++) {
+    circles[i].fillColor.hue += 1;
+    circles[i].scale(.9);
+  }
+  
+}
       console.log(view.size.height);
       console.log(view.size.width);
     </script>
